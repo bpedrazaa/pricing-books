@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UPB.PricingBooks.Data;
+using UPB.PricingBooks.Logic.Managers;
 
 namespace PricingBooks
 {
@@ -35,6 +36,7 @@ namespace PricingBooks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDbContext, DbContext>();
+            services.AddTransient<IProductsManager, ProductsManager>();
 
             services.AddControllers();
 
