@@ -45,4 +45,3 @@ namespace UPB.PricingBooks.Logic.Models
         }
     }
 }
-}
