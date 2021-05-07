@@ -6,7 +6,7 @@ using UPB.PricingBooks.Logic.Models;
 
 namespace UPB.PricingBooks.Logic.Managers
 {
-    public class ProductsManager
+    public class ProductsManager : IProductsManager
     {
         private readonly IDbContext _dbContext;
 
