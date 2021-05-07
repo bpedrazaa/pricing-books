@@ -7,9 +7,9 @@ namespace UPB.PricingBooks.Data
 {
     public interface IDbContext
     {
-        Producto AddGroup(Producto group);
-        Producto UpdateGroup(Producto groupToUpdate);
-        Producto DeleteGroup(Producto group);
-        List<Producto> GetAllGroup();
+        Product AddProduct(Product group);
+        Product UpdateProduct(Product groupToUpdate);
+        Product DeleteProduct(Product group);
+        List<Product> GetAllProduct();
     }
 }

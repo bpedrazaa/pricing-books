@@ -43,23 +43,23 @@ namespace UPB.PricingBooks.Data
             }
         }
 
-        public Producto AddGroup(Producto product)
+        public Producto AddProducto(Producto product)
         {
             ProductTable.Add(product);
             return product;
         }
-        public Producto UpdateGroup(Producto productToUpdate)
+        public Producto UpdateProducto(Producto productToUpdate)
         {
             Producto productL = ProductTable.Find(product => product.IdProducto == productToUpdate.IdProducto);
             productL = productToUpdate;
             return productL;
         }
-        public Producto DeleteGroup(Producto product)
+        public Producto DeleteProducto(Producto product)
         {
             ProductTable.Remove(product);
             return product;
         }
-        public List<Producto> GetAllGroup()
+        public List<Producto> GetAllProducto()
         {
             return ProductTable;
         }
