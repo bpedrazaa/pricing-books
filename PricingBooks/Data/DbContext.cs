@@ -9,7 +9,7 @@ namespace UPB.PricingBooks.Data
 {
     public class DbContext: IDbContext
     {
-        public List<Producto> ProductTable { get; set; }
+        public List<Product> ProductTable { get; set; }
 
         public DbContext()
         {
@@ -30,7 +30,7 @@ namespace UPB.PricingBooks.Data
                     // the file is reached.
                     while ((json += sr.ReadLine()) != null) {   }
                     //List<producto> items = JsonConvert.DeserializeObject<List<producto>>(json);
-                    ProductTable = JsonConvert.DeserializeObject<List<Producto>>(json);
+                    ProductTable = JsonConvert.DeserializeObject<List<Product>>(json);
 
                     Console.WriteLine("Tamano");;
                 }
@@ -43,23 +43,23 @@ namespace UPB.PricingBooks.Data
             }
         }
 
-        public Producto AddProducto(Producto product)
+        public Product AddProduct(Product product)
         {
             ProductTable.Add(product);
             return product;
         }
-        public Producto UpdateProducto(Producto productToUpdate)
+        public Product UpdateProduct(Product productToUpdate)
         {
-            Producto productL = ProductTable.Find(product => product.IdProducto == productToUpdate.IdProducto);
+            Product productL = ProductTable.Find(product => product.IdProducto == productToUpdate.IdProducto);
             productL = productToUpdate;
             return productL;
         }
-        public Producto DeleteProducto(Producto product)
+        public Product DeleteProduct(Product product)
         {
             ProductTable.Remove(product);
             return product;
         }
-        public List<Producto> GetAllProducto()
+        public List<Product> GetAllProduct()
         {
             return ProductTable;
         }
