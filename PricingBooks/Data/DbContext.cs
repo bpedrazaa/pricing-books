@@ -5,6 +5,7 @@ using System.Text;
 using UPB.PricingBooks.Data.Models;
 using Newtonsoft.Json;
 using UPB.PricingBooks.Data.Exceptions;
+using Serilog;
 
 namespace UPB.PricingBooks.Data
 {
@@ -45,6 +46,7 @@ namespace UPB.PricingBooks.Data
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
                 throw new DBException(" Can't Read the json file");
+                Log.Error("This was the Error"+e.StackTrace + e.Message);
             }
         }
 
@@ -53,6 +55,8 @@ namespace UPB.PricingBooks.Data
             if (product.IdProducto == "")
             {
                 throw new InvalidProductDataException("the product don't have all data");
+                Log.Error("Invalid Data, Can't add this product");
+
             }
             ProductTable.Add(product);
             return product;
@@ -63,6 +67,8 @@ namespace UPB.PricingBooks.Data
             if (productToUpdate.IdProducto == "")
             {
                 throw new InvalidProductDataException("the product don't have all data");
+                Log.Error("Invalid Data, the product don't have all data");
+
             }
             Product productL = new Product();
             try
@@ -72,7 +78,9 @@ namespace UPB.PricingBooks.Data
             }
             catch
             {
-                throw new InvalidProductDataException(" did't not find the product ");
+                throw new InvalidProductDataException(" did't find the product to update");
+                Log.Error("did't find the product to update");
+
             }
             return productL;
         }
@@ -81,16 +89,16 @@ namespace UPB.PricingBooks.Data
             if (product.IdProducto == "")
             {
                 throw new InvalidProductDataException("the product don't have all data");
+                Log.Error("Invalid Data, the product don't have all data");
             }
             try
             {
                 ProductTable.Remove(product);
-
             }
             catch
             {
-                throw new InvalidProductDataException(" did't not find the product ");
-
+                throw new InvalidProductDataException(" did't  find the product to remove ");
+                Log.Error("did't  find the product to remove ");
             }
             return product;
         }
