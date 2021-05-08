@@ -4,8 +4,8 @@ using System.Text;
 
 namespace UPB.PricingBooks.Data.Exceptions
 {
-    public class NotFindedProductException:Exception
+    public class InvalidProductDataException:Exception
     {
-        public NotFindedProductException(string ss) : base(ss) { }
+        public InvalidProductDataException(string ss) : base(ss) { }
     }
 }

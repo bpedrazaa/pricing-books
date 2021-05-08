@@ -44,19 +44,26 @@ namespace UPB.PricingBooks.Data
                 // Let the user know what went wrong.
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
-                throw new CantReadFileException(" Can't Read the json file");
+                throw new DBException(" Can't Read the json file");
             }
         }
 
         public Product AddProduct(Product product)
         {
-
+            if (product.IdProducto == "")
+            {
+                throw new InvalidProductDataException("the product don't have all data");
+            }
             ProductTable.Add(product);
             return product;
         }
 
         public Product UpdateProduct(Product productToUpdate)
         {
+            if (productToUpdate.IdProducto == "")
+            {
+                throw new InvalidProductDataException("the product don't have all data");
+            }
             Product productL = new Product();
             try
             {
@@ -65,12 +72,16 @@ namespace UPB.PricingBooks.Data
             }
             catch
             {
-                throw new NotFindedProductException(" did't not find the product ");
+                throw new InvalidProductDataException(" did't not find the product ");
             }
             return productL;
         }
         public Product DeleteProduct(Product product)
         {
+            if (product.IdProducto == "")
+            {
+                throw new InvalidProductDataException("the product don't have all data");
+            }
             try
             {
                 ProductTable.Remove(product);
@@ -78,14 +89,14 @@ namespace UPB.PricingBooks.Data
             }
             catch
             {
-                throw new NotFindedProductException(" did't not find the product ");
+                throw new InvalidProductDataException(" did't not find the product ");
 
             }
             return product;
         }
         public List<Product> GetAllProduct()
         {
-            if(ProductTable.Count > 1)
+            if(ProductTable.Count > 0)
             {
                 throw new ListEmptyException("The list is empty");
             }

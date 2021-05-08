@@ -4,9 +4,9 @@ using System.Text;
 
 namespace UPB.PricingBooks.Data.Exceptions
 {
-    public class CantReadFileException : Exception
+    public class DBException : Exception
     {
-        public CantReadFileException(string ss) : base(ss)
+        public DBException(string ss) : base(ss)
         {
 
         }
