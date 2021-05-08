@@ -11,8 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using UPB.PricingBooks.Data;
 using UPB.PricingBooks.Logic.Managers;
+//using UPB.PricingBooks.Services.Service;
 
 namespace PricingBooks
 {
@@ -30,14 +32,14 @@ namespace PricingBooks
             Configuration = builder.Build();
         }
 
-        
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDbContext, DbContext>();
             services.AddTransient<IProductsManager, ProductsManager>();
-
+            //services.AddTransient<ICampaignService, CampaignService>();
             services.AddControllers();
 
             services.AddSwaggerGen(p =>
