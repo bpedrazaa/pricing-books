@@ -46,7 +46,7 @@ namespace UPB.PricingBooks.Data
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
                 throw new DBException(" Can't Read the json file");
-                Log.Error("This was the Error"+e.StackTrace + e.Message);
+                Log.Error("This was the Error" + e.StackTrace + e.Message);
             }
         }
 
@@ -91,6 +91,7 @@ namespace UPB.PricingBooks.Data
                 throw new InvalidProductDataException("the product don't have all data");
                 Log.Error("Invalid Data, the product don't have all data");
             }
+
             try
             {
                 ProductTable.Remove(product);

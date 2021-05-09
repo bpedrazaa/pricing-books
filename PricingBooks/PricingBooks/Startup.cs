@@ -32,12 +32,13 @@ namespace PricingBooks
 
             Configuration = builder.Build();
 
+            //Serilog Configuration
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel
-                .Error()
-                .WriteTo.File("c/")
+                .Information()
+                .WriteTo.File(Configuration.GetSection("Project").GetSection("LogPath").Value)
                 .CreateLogger();
-            Log.Information($"I'm in the enviroment: {env.EnvironmentName}")
+            Log.Information($"In environment: {env.EnvironmentName}");
         }
 
 

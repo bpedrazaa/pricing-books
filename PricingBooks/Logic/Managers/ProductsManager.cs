@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UPB.PricingBooks.Data;
+using UPB.PricingBooks.Logic.Exceptions;
 using UPB.PricingBooks.Logic.Models;
 using UPB.PricingBooks.Services;
 
@@ -25,6 +27,12 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public Product CreateProduct(Product product)
         {
+            if(product.ProductId.Trim() == "")
+            {
+                Log.Error("Invalid Data, Can't create product:");
+                throw new InvalidProductDataException("The Product data is not a valid type of data");
+            }
+
             // Control for promotion price based on Campaign microservice
             string codeCampaign = _campaignService.GetCampaign().Result.Code;
 
@@ -45,12 +53,24 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public Product UpdateProduct(Product product)
         {
+            if (product.ProductId.Trim() == "")
+            {
+                Log.Error("Invalid Data, Can't update product");
+                throw new InvalidProductDataException("The Product data is not a valid type of data");
+            }
+
             Data.Models.Product productUpdated = _dbContext.UpdateProduct(DTOMappers.MapProductLD(product));
             return DTOMappers.MapProductDL(productUpdated);
         }
 
         public Product DeleteProduct(Product product)
         {
+            if (product.ProductId.Trim() == "")
+            {
+                Log.Error("Invalid Data, Can't delete product");
+                throw new InvalidProductDataException("The Product data is not a valid type of data");
+            }
+
             _dbContext.DeleteProduct(DTOMappers.MapProductLD(product));
             return product;
         }
