@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,14 @@ namespace PricingBooks
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+
+            //Serilog Configuration
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel
+                .Information()
+                .WriteTo.File(Configuration.GetSection("Project").GetSection("LogPath").Value)
+                .CreateLogger();
+            Log.Information($"In environment: {env.EnvironmentName}");
         }
 
 
