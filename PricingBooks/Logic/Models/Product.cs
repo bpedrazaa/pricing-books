@@ -7,7 +7,7 @@ namespace UPB.PricingBooks.Logic.Models
     public class Product
     {
         public string ProductId { get; set; }
-        public int FixedPrice { get; set; }
-        public int PromotionPrice { get; set; }
+        public double FixedPrice { get; set; }
+        public double PromotionPrice { get; set; }
     }
 }
