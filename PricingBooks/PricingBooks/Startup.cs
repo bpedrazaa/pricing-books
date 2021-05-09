@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 
 using UPB.PricingBooks.Data;
 using UPB.PricingBooks.Logic.Managers;
-//using UPB.PricingBooks.Services.Service;
 
 namespace PricingBooks
 {
@@ -39,7 +38,6 @@ namespace PricingBooks
         {
             services.AddSingleton<IDbContext, DbContext>();
             services.AddTransient<IProductsManager, ProductsManager>();
-            //services.AddTransient<ICampaignService, CampaignService>();
             services.AddControllers();
 
             services.AddSwaggerGen(p =>
