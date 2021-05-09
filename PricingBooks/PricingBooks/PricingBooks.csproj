@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Log\**" />
+    <Content Remove="Log\**" />
+    <EmbeddedResource Remove="Log\**" />
+    <None Remove="Log\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.4" />
@@ -15,10 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Log\" />
   </ItemGroup>
 
 

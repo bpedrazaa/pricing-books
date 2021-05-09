@@ -23,21 +23,22 @@ namespace UPB.PricingBooks.Data
             string json = "";
             try
             {
-                string jsonM; 
+                string jsonM;
                 // Create an instance of StreamReader to read from a file.
                 // The using statement also closes the StreamReader.
                 //----- i am not sure that is the correct path
-                using (StreamReader sr = new StreamReader("C:/Universidad/5 semestre/Certificacion/ProjectPB/PricingBooks/Data/Models/Example1.json"))
+                using (StreamReader sr = new StreamReader("D:/Stuff/UPB/Certificacion I/Tercer_Parcial/Final_Project/PricingBooks/Data/Models/Example1.json"))
                 {
                     // Read and display lines from the file until the end of
                     // the file is reached.
-                    while ((jsonM = sr.ReadLine()) != null) {
+                    while ((jsonM = sr.ReadLine()) != null)
+                    {
                         json += jsonM;
                     }
                     //List<producto> items = JsonConvert.DeserializeObject<List<producto>>(json);
                     ProductTable = JsonConvert.DeserializeObject<List<Product>>(json);
 
-                    Console.WriteLine("Tamano");;
+                    Console.WriteLine("Tamano"); ;
                 }
             }
             catch (Exception e)
@@ -105,7 +106,7 @@ namespace UPB.PricingBooks.Data
         }
         public List<Product> GetAllProduct()
         {
-            if(ProductTable.Count > 0)
+            if(ProductTable.Count == 0)
             {
                 throw new ListEmptyException("The list is empty");
             }

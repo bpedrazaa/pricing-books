@@ -35,7 +35,6 @@ namespace UPB.PricingBooks.Logic.Managers
 
             // Control for promotion price based on Campaign microservice
             string codeCampaign = _campaignService.GetCampaign().Result.Code;
-
             if (codeCampaign == "XMAS" || codeCampaign == "xmas") {
                 product.PromotionPrice = product.FixedPrice * 0.05;
             }else if(codeCampaign == "SUMMER" || codeCampaign == "summer")
@@ -45,6 +44,11 @@ namespace UPB.PricingBooks.Logic.Managers
             else if(codeCampaign == "BFRIDAY" || codeCampaign == "bfriday")
             {
                 product.PromotionPrice = product.FixedPrice * 0.25;
+            }
+            else
+            {
+                Log.Error("Campaign code not finded");
+                throw new InvalidCampaignDataException("The type of campaign is unvalid to work with");
             }
 
             _dbContext.AddProduct(DTOMappers.MapProductLD(product));
