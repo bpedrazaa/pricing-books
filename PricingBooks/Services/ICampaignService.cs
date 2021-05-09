@@ -1,9 +1,10 @@
-using System.Threading.Tasks;
+﻿using UPB.PricingBooks.Services.Models;
+using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
-using UPB.PricingBooks.Services.Models;
-
-namespace UPB.PricingBooks.Services.Service
+namespace UPB.PricingBooks.Services
 {
     public interface ICampaignService
     {

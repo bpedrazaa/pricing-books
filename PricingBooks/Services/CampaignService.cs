@@ -1,30 +1,31 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-
-using Microsoft.Extensions.Configuration;
-
+﻿//using Microsoft.Extensions.Configuration;
 using UPB.PricingBooks.Services.Models;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UPB.PricingBooks.Services.Service
+namespace UPB.PricingBooks.Services
 {
     public class CampaignService : ICampaignService
     {
         public readonly HttpClient _campaignHttp;
-        private readonly IConfiguration _configuration;
+        //private readonly IConfiguration _configuration;
 
-        public CampaignService(HttpClient campaign, IConfiguration configuration)
+        /*public CampaignService(HttpClient campaign, IConfiguration configuration)
         {
             _configuration = configuration;
             campaign.BaseAddress = new Uri(_configuration["Microservices:CampaignUrl"]);
             _campaignHttp = campaign;
+        }*/
+
+        public CampaignService(HttpClient campaign)
+        {
+            //This Uri got to be from the other service (Campaign), not our service.
+            campaign.BaseAddress = new Uri("http://localhost:5000/api");
+            _campaignHttp = campaign;
         }
-        // public CampaignService(HttpClient campaign)
-        // {
-        //     campaign.BaseAddress = new Uri("http://localhost:5000/api");
-        //     _campaignHttp = campaign;
-        // }
 
         public async Task<Campaign> GetCampaign()
         {
@@ -43,6 +44,5 @@ namespace UPB.PricingBooks.Services.Service
             List<Campaign> campaigns = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Campaign>>(responseBody);
             return campaigns;
         }
-
     }
 }

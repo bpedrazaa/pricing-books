@@ -1,3 +1,7 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
 namespace UPB.PricingBooks.Services.Models
 {
     public class Campaign
@@ -7,3 +11,4 @@ namespace UPB.PricingBooks.Services.Models
         public string Description { get; set; }
     }
 }
+        
