@@ -7,7 +7,7 @@ namespace UPB.PricingBooks.Data.Models
     public class Product
     {
         public string IdProducto { get; set; }
-        public int precio { get; set; }
-        public int precioF { get; set; }
+        public double precio { get; set; }
+        public double precioF { get; set; }
     }
 }
