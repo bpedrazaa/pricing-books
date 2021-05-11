@@ -33,12 +33,10 @@ namespace UPB.PricingBooks.Services
         {
             try
             {
-                HttpClient _campaignHttp = new HttpClient();
-                _campaignHttp.BaseAddress = new Uri("http://localhost:5004");
-                var response = await _campaignHttp.GetAsync("/campaign");
-                string responseBody = await response.Content.ReadAsStringAsync();
-                //string responseMock = "{\"name\":\"Black Friday Campaign 2021\",\"code\":\"BFRIDAY\",\"description\":\"All products have a discount\"}";
-                Campaign campaign = Newtonsoft.Json.JsonConvert.DeserializeObject<Campaign>(responseBody);
+               //var response = await _campaignHttp.GetAsync("/campaign");
+                //string responseBody = await response.Content.ReadAsStringAsync();
+                string responseMock = "{\"name\":\"Black Friday Campaign 2021\",\"code\":\"BFRIDAY\",\"description\":\"All products have a discount\"}";
+                Campaign campaign = Newtonsoft.Json.JsonConvert.DeserializeObject<Campaign>(responseMock);
                 return campaign;
             }
             catch (Exception ex)
