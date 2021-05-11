@@ -22,7 +22,13 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public List<Product> GetProducts()
         {
-            return DTOMappers.MapProductsDL(_dbContext.GetAllProduct());
+            List<Product> products =  DTOMappers.MapProductsDL(_dbContext.GetAllProduct());
+            // Calculate the promotion price for each of the products in the database
+            foreach (Product p in products)
+            {
+                calculatePromotionPrice(p);
+            }
+            return products;
         }
 
         public Product CreateProduct(Product product)
@@ -33,23 +39,8 @@ namespace UPB.PricingBooks.Logic.Managers
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
             }
 
-            // Control for promotion price based on Campaign microservice
-            string codeCampaign = _campaignService.GetCampaign().Result.Code;
-            if (codeCampaign == "XMAS" || codeCampaign == "xmas") {
-                product.PromotionPrice = product.FixedPrice * 0.05;
-            }else if(codeCampaign == "SUMMER" || codeCampaign == "summer")
-            {
-                product.PromotionPrice = product.FixedPrice * 0.2;
-            }
-            else if(codeCampaign == "BFRIDAY" || codeCampaign == "bfriday")
-            {
-                product.PromotionPrice = product.FixedPrice * 0.25;
-            }
-            else
-            {
-                Log.Error("Campaign code not finded");
-                throw new InvalidCampaignDataException("The type of campaign is unvalid to work with");
-            }
+            //Calculate promotion price
+            calculatePromotionPrice(product);
 
             _dbContext.AddProduct(DTOMappers.MapProductLD(product));
             return product;
@@ -77,6 +68,30 @@ namespace UPB.PricingBooks.Logic.Managers
 
             _dbContext.DeleteProduct(DTOMappers.MapProductLD(product));
             return product;
+        }
+
+        
+        private void calculatePromotionPrice(Product product)
+        {
+            // Control for promotion price based on Campaign microservice
+            string codeCampaign = _campaignService.GetCampaign().Result.Code;
+            if (codeCampaign == "XMAS" || codeCampaign == "xmas")
+            {
+                product.PromotionPrice = product.FixedPrice * 0.05;
+            }
+            else if (codeCampaign == "SUMMER" || codeCampaign == "summer")
+            {
+                product.PromotionPrice = product.FixedPrice * 0.2;
+            }
+            else if (codeCampaign == "BFRIDAY" || codeCampaign == "bfriday")
+            {
+                product.PromotionPrice = product.FixedPrice * 0.25;
+            }
+            else
+            {
+                Log.Error("Campaign code not finded");
+                throw new InvalidCampaignDataException("The type of campaign is unvalid to work with");
+            }
         }
     }
 }
