@@ -7,12 +7,12 @@ namespace UPB.PricingBooks.Logic.Managers
 {
     public interface IProductsManager
     {
-        public List<Product> GetProducts();
+        public List<Product> GetProducts(int pricingBookId);
 
-        public Product CreateProduct(Product product);
+        public Product CreateProduct(Product product, int pricingBookId);
 
-        public Product UpdateProduct(Product product);
+        public Product UpdateProduct(Product product, int pricingBookId);
 
-        public Product DeleteProduct(Product product);
+        public Product DeleteProduct(Product product, int pricingBookId);
     }
 }

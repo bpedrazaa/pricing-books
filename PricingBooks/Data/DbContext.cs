@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+
 using UPB.PricingBooks.Data.Models;
 using Newtonsoft.Json;
 using UPB.PricingBooks.Data.Exceptions;
@@ -27,7 +28,7 @@ namespace UPB.PricingBooks.Data
                 // Create an instance of StreamReader to read from a file.
                 // The using statement also closes the StreamReader.
                 //----- i am not sure that is the correct path
-                using (StreamReader sr = new StreamReader("D:/Stuff/UPB/Certificacion I/Tercer_Parcial/Final_Project/PricingBooks/Data/Models/Example1.json"))
+                using (StreamReader sr = new StreamReader("D:/Stuff/UPB/Certificacion I/Tercer_Parcial/Final_Project/PricingBooks/Data/Models/DataBase.json"))
                 {
                     // Read and display lines from the file until the end of
                     // the file is reached.
@@ -38,7 +39,6 @@ namespace UPB.PricingBooks.Data
                     //List<producto> items = JsonConvert.DeserializeObject<List<producto>>(json);
                     ProductTable = JsonConvert.DeserializeObject<List<Product>>(json);
 
-                    Console.WriteLine("Tamano"); ;
                 }
             }
             catch (Exception e)

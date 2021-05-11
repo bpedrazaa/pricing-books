@@ -9,7 +9,7 @@ using UPB.PricingBooks.Logic.Models;
 namespace UPB.PricingBooks.Presentation.Controllers
 {
     [ApiController]
-    [Route("api/products")]
+    [Route("api/pricing-books")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductsManager _productsManager;
@@ -20,27 +20,31 @@ namespace UPB.PricingBooks.Presentation.Controllers
 
         //CRUD
         [HttpGet]
-        public List<Product> GetProducts()
+        [Route("{pricingBookId}/products")]
+        public List<Product> GetProducts([FromRoute] int pricingBookId)
         {
-            return _productsManager.GetProducts();
+            return _productsManager.GetProducts(pricingBookId);
         }
 
         [HttpPost]
-        public Product CreateProduct([FromBody] Product product)
+        [Route("{pricingBookId}/products")]
+        public Product CreateProduct([FromBody] Product product, [FromRoute] int pricingBookId)
         {
-            return _productsManager.CreateProduct(product);
+            return _productsManager.CreateProduct(product, pricingBookId);
         }
 
         [HttpPut]
-        public Product UpdateProduct([FromBody] Product product)
+        [Route("{pricingBookId}/products")]
+        public Product UpdateProduct([FromBody] Product product, [FromRoute] int pricingBookId)
         {
-            return _productsManager.UpdateProduct(product);
+            return _productsManager.UpdateProduct(product, pricingBookId);
         }
 
         [HttpDelete]
-        public Product DeleteProduct([FromBody] Product product)
+        [Route("{pricingBookId}/products")]
+        public Product DeleteProduct([FromBody] Product product, [FromRoute] int pricingBookId)
         {
-            return _productsManager.DeleteProduct(product);
+            return _productsManager.DeleteProduct(product, pricingBookId);
         }
     }
 }
