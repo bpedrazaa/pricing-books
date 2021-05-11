@@ -22,6 +22,7 @@ namespace UPB.PricingBooks.Logic.Models
             {
                 mappedProducts.Add(new Product()
                 {
+                    PricingBookId = product.PricingBookId,
                     ProductId = product.IdProducto,
                     FixedPrice = product.precio,
                     PromotionPrice = product.precioF
@@ -40,6 +41,7 @@ namespace UPB.PricingBooks.Logic.Models
             }
 
             Data.Models.Product mappedProduct = new Data.Models.Product();
+            mappedProduct.PricingBookId = product.PricingBookId;
             mappedProduct.IdProducto = product.ProductId;
             mappedProduct.precio = product.FixedPrice;
             mappedProduct.precioF = product.PromotionPrice;
@@ -56,12 +58,13 @@ namespace UPB.PricingBooks.Logic.Models
                 throw new InvalidProductDataException("Can't work with null objects");
             }
 
-            Product mappedGroup = new Product();
-            mappedGroup.ProductId = product.IdProducto;
-            mappedGroup.FixedPrice = product.precio;
-            mappedGroup.PromotionPrice = product.precioF;
+            Product mappedProduct = new Product();
+            mappedProduct.PricingBookId = product.PricingBookId;
+            mappedProduct.ProductId = product.IdProducto;
+            mappedProduct.FixedPrice = product.precio;
+            mappedProduct.PromotionPrice = product.precioF;
 
-            return mappedGroup;
+            return mappedProduct;
         }
     }
 }

@@ -20,9 +20,12 @@ namespace UPB.PricingBooks.Logic.Managers
             _campaignService = campaignService;
         }
 
-        public List<Product> GetProducts()
+        public List<Product> GetProducts(int pricingBookId)
         {
             List<Product> products =  DTOMappers.MapProductsDL(_dbContext.GetAllProduct());
+            //Get the products from the pricingBookID
+                products = products.FindAll(product => product.PricingBookId == pricingBookId);
+
             // Calculate the promotion price for each of the products in the database
             foreach (Product p in products)
             {
@@ -31,13 +34,16 @@ namespace UPB.PricingBooks.Logic.Managers
             return products;
         }
 
-        public Product CreateProduct(Product product)
+        public Product CreateProduct(Product product, int pricingBookId)
         {
             if(product.ProductId.Trim() == "")
             {
                 Log.Error("Invalid Data, Can't create product:");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
             }
+
+            //product.PricingBookId = pricingBookId;
+            product.PricingBookId = 1;
 
             //Calculate promotion price
             calculatePromotionPrice(product);
@@ -46,25 +52,29 @@ namespace UPB.PricingBooks.Logic.Managers
             return product;
         }
 
-        public Product UpdateProduct(Product product)
+        public Product UpdateProduct(Product product, int pricingBookId)
         {
             if (product.ProductId.Trim() == "")
             {
                 Log.Error("Invalid Data, Can't update product");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
             }
+            //product.PricingBookId = pricingBookId;
+            product.PricingBookId = 1;
 
             Data.Models.Product productUpdated = _dbContext.UpdateProduct(DTOMappers.MapProductLD(product));
             return DTOMappers.MapProductDL(productUpdated);
         }
 
-        public Product DeleteProduct(Product product)
+        public Product DeleteProduct(Product product, int pricingBookId)
         {
             if (product.ProductId.Trim() == "")
             {
                 Log.Error("Invalid Data, Can't delete product");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
             }
+            //product.PricingBookId = pricingBookId;
+            product.PricingBookId = 1;
 
             _dbContext.DeleteProduct(DTOMappers.MapProductLD(product));
             return product;
