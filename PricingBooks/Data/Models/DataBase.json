@@ -1,0 +1,14 @@
+
+  [
+    {
+      "IdProducto": "SOCCKER-000",
+      "precio": 200,
+      "precioF": 0
+    },
+    {
+      "IdProducto": "BASKET-000",
+      "precio": 150,
+      "precioF": 0  
+    }
+  ]
+
