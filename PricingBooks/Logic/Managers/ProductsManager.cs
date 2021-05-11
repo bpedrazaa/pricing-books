@@ -23,7 +23,7 @@ namespace UPB.PricingBooks.Logic.Managers
         public List<Product> GetProducts(int pricingBookId)
         {
             List<Product> products =  DTOMappers.MapProductsDL(_dbContext.GetAllProduct());
-            //Get the products from the pricingBookID
+            // Get the products from the pricingBookID
             products = products.FindAll(product => product.PricingBookId == pricingBookId);
 
             // Calculate the promotion price for each of the products in the database
@@ -36,12 +36,14 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public Product CreateProduct(Product product, int pricingBookId)
         {
+            // Verfication if the product id is an empty field
             if(product.ProductId.Trim() == "")
             {
                 Log.Error("Invalid Data, Can't create product:");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
             }
 
+            // For scalability you can uncommment the next line and delete the next next line.
             //product.PricingBookId = pricingBookId;
             product.PricingBookId = 1;
 
@@ -54,11 +56,14 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public Product UpdateProduct(Product product, int pricingBookId)
         {
+            // Verfication if the product id is an empty field
             if (product.ProductId.Trim() == "")
             {
                 Log.Error("Invalid Data, Can't update product");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
             }
+
+            // For scalability you can uncommment the next line and delete the next next line.
             //product.PricingBookId = pricingBookId;
             product.PricingBookId = 1;
 
@@ -68,11 +73,14 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public Product DeleteProduct(Product product, int pricingBookId)
         {
+            // Verfication if the product id is an empty field
             if (product.ProductId.Trim() == "")
             {
                 Log.Error("Invalid Data, Can't delete product");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
             }
+
+            // For scalability you can uncommment the next line and delete the next next line.
             //product.PricingBookId = pricingBookId;
             product.PricingBookId = 1;
 
@@ -99,8 +107,8 @@ namespace UPB.PricingBooks.Logic.Managers
             }
             else
             {
-                Log.Error("Campaign code not finded");
-                throw new InvalidCampaignDataException("The type of campaign is unvalid to work with");
+                //If an active campaig does not exist the promotion price is empty.
+                product.PromotionPrice = 0;
             }
         }
     }
