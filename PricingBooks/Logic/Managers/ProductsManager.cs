@@ -24,7 +24,7 @@ namespace UPB.PricingBooks.Logic.Managers
         {
             List<Product> products =  DTOMappers.MapProductsDL(_dbContext.GetAllProduct());
             //Get the products from the pricingBookID
-                products = products.FindAll(product => product.PricingBookId == pricingBookId);
+            products = products.FindAll(product => product.PricingBookId == pricingBookId);
 
             // Calculate the promotion price for each of the products in the database
             foreach (Product p in products)
