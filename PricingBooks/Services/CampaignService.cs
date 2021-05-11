@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using UPB.PricingBooks.Services.Exceptions;
+using Serilog;
 
 namespace UPB.PricingBooks.Services
 {
@@ -29,20 +31,39 @@ namespace UPB.PricingBooks.Services
 
         public async Task<Campaign> GetCampaign()
         {
-            //var response = await _campaignHttp.GetAsync("/campaign");
-            //string responseBody = await response.Content.ReadAsStringAsync();
-            string responseMock = "{\"name\":\"Black Friday Campaign 2021\",\"code\":\"BFRIDAY\",\"description\":\"All products have a discount\"}";
-            Campaign campaign = Newtonsoft.Json.JsonConvert.DeserializeObject<Campaign>(responseMock);
-            return campaign;
+            try
+            {
+                HttpClient _campaignHttp = new HttpClient();
+                _campaignHttp.BaseAddress = new Uri("http://localhost:5004");
+                var response = await _campaignHttp.GetAsync("/campaign");
+                string responseBody = await response.Content.ReadAsStringAsync();
+                //string responseMock = "{\"name\":\"Black Friday Campaign 2021\",\"code\":\"BFRIDAY\",\"description\":\"All products have a discount\"}";
+                Campaign campaign = Newtonsoft.Json.JsonConvert.DeserializeObject<Campaign>(responseBody);
+                return campaign;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("This was the error: " + ex.StackTrace + ex.Message);
+                throw new ServiceException("Can not connect to to the service");
+            }
         }
 
         public async Task<List<Campaign>> GetAllCampaign()
         {
-            //var response = await _campaignHttp.GetAsync("/campaign");
-            //string responseBody = await response.Content.ReadAsStringAsync();
-            string responseMock = "[{\"name\":\"Black Friday Campaign 2021\",\"code\":\"BFRIDAY\",\"description\":\"All products have a discount\"}]";
-            List<Campaign> campaigns = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Campaign>>(responseMock);
-            return campaigns;
+            try
+            {
+                //var response = await _campaignHttp.GetAsync("/campaign");
+                //string responseBody = await response.Content.ReadAsStringAsync();
+                string responseMock = "[{\"name\":\"Black Friday Campaign 2021\",\"code\":\"BFRIDAY\",\"description\":\"All products have a discount\"}]";
+                List<Campaign> campaigns = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Campaign>>(responseMock);
+                return campaigns;
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error("This was the error: " + ex.StackTrace + ex.Message);
+                throw new ServiceException("Can not connect to to the service");
+            }
         }
     }
 }
