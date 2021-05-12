@@ -5,6 +5,9 @@
 	  <RootNamespace>UPB.PricingBooks.Presentation</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Production' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'QA' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' " />
   <ItemGroup>
     <Compile Remove="Log\**" />
     <Content Remove="Log\**" />
@@ -25,4 +28,7 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <Folder Include="Middlewares\" />
+  </ItemGroup>
 </Project>

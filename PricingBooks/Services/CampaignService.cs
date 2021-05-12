@@ -23,7 +23,7 @@ namespace UPB.PricingBooks.Services
             _campaignHttp = campaign;
         }*/
 
-       
+
 
         public async Task<Campaign> GetCampaign()
         {
@@ -31,7 +31,7 @@ namespace UPB.PricingBooks.Services
             {
                //var response = await _campaignHttp.GetAsync("/campaign");
                 //string responseBody = await response.Content.ReadAsStringAsync();
-                string responseMock = "{\"name\":\"Black Friday Campaign 2021\",\"code\":\"BFRIDAY\",\"description\":\"All products have a discount\"}";
+                string responseMock = "{\"name\":\"Black Friday Campaign 2021\",\"type\":\"BFRIDAY\",\"description\":\"All products have a discount\",\"enable\":\"true\"}";
                 Campaign campaign = Newtonsoft.Json.JsonConvert.DeserializeObject<Campaign>(responseMock);
                 return campaign;
             }
@@ -48,7 +48,7 @@ namespace UPB.PricingBooks.Services
             {
                 //var response = await _campaignHttp.GetAsync("/campaign");
                 //string responseBody = await response.Content.ReadAsStringAsync();
-                string responseMock = "[{\"name\":\"Black Friday Campaign 2021\",\"code\":\"BFRIDAY\",\"description\":\"All products have a discount\"}]";
+                string responseMock = "[{\"name\":\"Black Friday Campaign 2021\",\"type\":\"BFRIDAY\",\"description\":\"All products have a discount\",\"enable\":\"true\"}]";
                 List<Campaign> campaigns = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Campaign>>(responseMock);
                 return campaigns;
 

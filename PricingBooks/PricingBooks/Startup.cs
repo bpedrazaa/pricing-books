@@ -9,6 +9,7 @@ using Serilog;
 
 using UPB.PricingBooks.Data;
 using UPB.PricingBooks.Logic.Managers;
+using UPB.PricingBooks.Presentation.Middlewares;
 using UPB.PricingBooks.Services;
 
 namespace PricingBooks
@@ -55,10 +56,7 @@ namespace PricingBooks
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseGlobalExceptionHandler();
 
             app.UseSwagger();
             app.UseSwaggerUI(p =>
