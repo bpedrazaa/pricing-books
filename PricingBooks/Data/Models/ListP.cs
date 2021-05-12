@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UPB.PricingBooks.Data.Models;
+﻿using System.Collections.Generic;
 
 namespace UPB.PricingBooks.Data.Models
 {

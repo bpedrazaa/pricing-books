@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace UPB.PricingBooks.Services.Models
 {
     public class Campaign
