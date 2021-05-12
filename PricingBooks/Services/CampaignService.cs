@@ -1,4 +1,4 @@
-﻿//using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using UPB.PricingBooks.Services.Models;
 using System;
 using System.Collections.Generic;
@@ -12,22 +12,18 @@ namespace UPB.PricingBooks.Services
 {
     public class CampaignService : ICampaignService
     {
+        // Uncomment for wire-up
         //public readonly HttpClient _campaignHttp;
         //private readonly IConfiguration _configuration;
 
-        /*public CampaignService(HttpClient campaign, IConfiguration configuration)
+        /*public CampaignService(HttpClient campaign,IConfiguration configuration)
         {
             _configuration = configuration;
             campaign.BaseAddress = new Uri(_configuration["Microservices:CampaignUrl"]);
             _campaignHttp = campaign;
         }*/
 
-        public CampaignService(/*HttpClient campaign*/)
-        {
-            //This Uri got to be from the other service (Campaign), not our service.
-            //campaign.BaseAddress = new Uri("http://localhost:5001");
-            //_campaignHttp = campaign;
-        }
+       
 
         public async Task<Campaign> GetCampaign()
         {
