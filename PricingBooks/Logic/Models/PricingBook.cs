@@ -13,6 +13,6 @@ namespace UPB.PricingBooks.Logic.Models
 
         public string Name{ get; set; }  
         
-        public List<PricingBook> Content { get; set; }
+        public List<Product> Content { get; set; }
     }
 }

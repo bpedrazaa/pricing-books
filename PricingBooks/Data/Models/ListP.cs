@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UPB.PricingBooks.Data.Models;
 
-namespace UPB.PricingBooks.Logic.Models
+namespace UPB.PricingBooks.Data.Models
 {
     public class ListP
     {

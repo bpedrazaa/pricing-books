@@ -49,6 +49,7 @@ namespace PricingBooks
             services.AddSingleton<IDbContext, DbContext>();
             services.AddTransient<IProductsManager, ProductsManager>();
             services.AddTransient<ICampaignService, CampaignService>();
+            services.AddTransient<IPricingBooksManager, PricingBooksManager>();
             services.AddControllers();
 
             services.AddSwaggerGen(p =>

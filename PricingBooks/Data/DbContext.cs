@@ -7,7 +7,6 @@ using UPB.PricingBooks.Data.Models;
 using Newtonsoft.Json;
 using UPB.PricingBooks.Data.Exceptions;
 using Serilog;
-using UPB.PricingBooks.Logic.Models;
 
 namespace UPB.PricingBooks.Data
 {

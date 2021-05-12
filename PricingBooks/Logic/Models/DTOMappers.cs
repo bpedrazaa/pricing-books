@@ -31,6 +31,28 @@ namespace UPB.PricingBooks.Logic.Models
             return mappedProducts;
         }
 
+        public static List<Data.Models.Product> MapProductsLD(List<Product> products)
+        {
+            if (products == null)
+            {
+                Log.Error("Object is empty");
+                throw new InvalidProductDataException("Can't work with null objects");
+            }
+
+            List<Data.Models.Product> mappedProducts = new List<Data.Models.Product>();
+            foreach (Product product in products)
+            {
+                mappedProducts.Add(new Data.Models.Product()
+                {
+                    PricingBookId = product.PricingBookId,
+                    IdProducto = product.ProductId,
+                    precio= product.FixedPrice ,
+                    precioF = product.PromotionPrice
+                });
+            }
+            return mappedProducts;
+        }
+
         // Map a object product from Logic to Data layer format (LD) 
         public static Data.Models.Product MapProductLD(Product product)
         {
@@ -66,5 +88,64 @@ namespace UPB.PricingBooks.Logic.Models
 
             return mappedProduct;
         }
+
+        //Mapers for pricing books
+
+        public static List<PricingBook> MapPricingBooksDL(List<Data.Models.ListP> pricingBooks)
+        {
+            if (pricingBooks == null)
+            {
+                Log.Error("Object is empty");
+                throw new InvalidProductDataException("Can't work with null objects");
+            }
+
+            List<PricingBook> mappedPricingBooks = new List<PricingBook>();
+            foreach (Data.Models.ListP PB in pricingBooks)
+            {
+                mappedPricingBooks.Add(new PricingBook()
+                {
+                    Id= PB.Id,
+                    Name= PB.Name,
+                    Description= PB.Description,
+                    Content = DTOMappers.MapProductsDL(PB.Content)
+                });
+            }
+            return mappedPricingBooks;
+        }
+
+        public static Data.Models.ListP MapPricingBookLD(PricingBook PB)
+        {
+            if (PB == null)
+            {
+                Log.Error("Object is empty");
+                throw new InvalidProductDataException("Can't work with null objects");
+            }
+
+            Data.Models.ListP mappedPricingBook = new Data.Models.ListP();
+            mappedPricingBook.Id= PB.Id;
+            mappedPricingBook.Name = PB.Name;
+            mappedPricingBook.Description = PB.Description;
+            mappedPricingBook.Content = DTOMappers.MapProductsLD(PB.Content);
+
+            return mappedPricingBook;
+        }
+
+        public static PricingBook MapPricingBookDL(Data.Models.ListP PB)
+        {
+            if (PB == null)
+            {
+                Log.Error("Object is empty");
+                throw new InvalidProductDataException("Can't work with null objects");
+            }
+
+            PricingBook mappedPricingBook = new PricingBook();
+            mappedPricingBook.Id = PB.Id;
+            mappedPricingBook.Name= PB.Name;
+            mappedPricingBook.Description = PB.Description;
+            mappedPricingBook.Content = DTOMappers.MapProductsDL(PB.Content);
+
+            return mappedPricingBook;
+        }
+
     }
 }

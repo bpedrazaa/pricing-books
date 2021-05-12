@@ -11,5 +11,9 @@ namespace UPB.PricingBooks.Data
         Product UpdateProduct(Product groupToUpdate);
         Product DeleteProduct(Product group);
         List<Product> GetAllProduct();
+        ListP AddList(ListP list);
+        ListP UpdateList(ListP listUpdate);
+        ListP DeleteList(ListP list);
+        List<ListP> GetAlLList();
     }
 }

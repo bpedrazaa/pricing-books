@@ -9,7 +9,7 @@ using UPB.PricingBooks.Services;
 
 namespace UPB.PricingBooks.Logic.Managers
 {
-    class PricingBooksManager : IPricingBooksManager
+    public class PricingBooksManager : IPricingBooksManager
     {
         private readonly IDbContext _dbContext;
         private readonly IProductsManager _productsManager;
@@ -22,23 +22,27 @@ namespace UPB.PricingBooks.Logic.Managers
         }
         public List<PricingBook> GetPricingBooks()
         {
-            return null;
+            return DTOMappers.MapPricingBooksDL(_dbContext.GetAlLList());
         }
 
         public PricingBook CreatePricingBook(PricingBook book)
         {
-
-            return null;//Lo dejamos con el throw por que: todavia falta lo del Fabri
+            _dbContext.AddList(DTOMappers.MapPricingBookLD(book));
+            return book;
         }
 
         public PricingBook UpdatePricingBook(PricingBook book)
         {
-            return null;
+            Data.Models.ListP bookUpdated = new Data.Models.ListP();
+            bookUpdated = _dbContext.UpdateList(DTOMappers.MapPricingBookLD(book));
+            return DTOMappers.MapPricingBookDL(bookUpdated);
+            
         }
 
         public PricingBook DeletePricingBook(PricingBook book)
         {
-            return null;
+            _dbContext.DeleteList(DTOMappers.MapPricingBookLD(book));
+            return book;
         }
     }
 }
