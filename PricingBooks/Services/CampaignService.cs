@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
-using UPB.PricingBooks.Services.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using UPB.PricingBooks.Services.Exceptions;
+
 using Serilog;
+
+using UPB.PricingBooks.Services.Models;
+using UPB.PricingBooks.Services.Exceptions;
+
 
 namespace UPB.PricingBooks.Services
 {

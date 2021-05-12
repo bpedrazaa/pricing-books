@@ -1,11 +1,7 @@
-﻿using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
 using UPB.PricingBooks.Data;
-using UPB.PricingBooks.Logic.Exceptions;
 using UPB.PricingBooks.Logic.Models;
-using UPB.PricingBooks.Services;
 
 namespace UPB.PricingBooks.Logic.Managers
 {
@@ -22,7 +18,7 @@ namespace UPB.PricingBooks.Logic.Managers
         }
         public List<PricingBook> GetPricingBooks()
         {
-            return DTOMappers.MapPricingBooksDL(_dbContext.GetAlLList());
+            return DTOMappers.MapPricingBooksDL(_dbContext.GetAllList());
         }
 
         public PricingBook CreatePricingBook(PricingBook book)

@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-using UPB.PricingBooks.Data.Models;
-using Newtonsoft.Json;
-using UPB.PricingBooks.Data.Exceptions;
+using Microsoft.Extensions.Configuration;
+
 using Serilog;
+using Newtonsoft.Json;
+
+using UPB.PricingBooks.Data.Exceptions;
+using UPB.PricingBooks.Data.Models;
+
 
 namespace UPB.PricingBooks.Data
 {
     public class DbContext: IDbContext
     {
+        private readonly IConfiguration _configuration;
         public List<Product> ProductTable { get; set; }
         public List<ListP> ListProduct { get; set; }
 
-        public DbContext()
+        public DbContext(IConfiguration configuration)
         {
+            _configuration = configuration;
             _initDbProduct();
             _initDbList();
         }
@@ -30,7 +35,7 @@ namespace UPB.PricingBooks.Data
                 string jsonM;
                 // Create an instance of StreamReader to read from a file.
 
-                using (StreamReader sr = new StreamReader("../Data/Models/DataBaseProduct.json"))
+                using (StreamReader sr = new StreamReader(_configuration["Project:ProductsDataBase"]))
 
                 {
                     // Read and display lines from the file until the end of
@@ -65,7 +70,7 @@ namespace UPB.PricingBooks.Data
                 // Create an instance of StreamReader to read from a file.
                 // The using statement also closes the StreamReader.
                 //----- i am not sure that is the correct path()
-                using (StreamReader sr = new StreamReader("../Data/Models/DataBaseList.json"))
+                using (StreamReader sr = new StreamReader(_configuration["Project:PricingBooksDataBase"]))
                 {
                     // Read and display lines from the file until the end of
                     // the file is reached.
@@ -208,7 +213,7 @@ namespace UPB.PricingBooks.Data
             }
             return list;
         }
-        public List<ListP> GetAlLList()
+        public List<ListP> GetAllList()
         {
             if (ListProduct.Count == 0)
             {

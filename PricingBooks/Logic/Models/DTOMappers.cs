@@ -1,7 +1,7 @@
-﻿using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
+using Serilog;
+
 using UPB.PricingBooks.Logic.Exceptions;
 
 namespace UPB.PricingBooks.Logic.Models

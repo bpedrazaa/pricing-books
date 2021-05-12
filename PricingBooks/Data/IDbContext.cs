@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
 using UPB.PricingBooks.Data.Models;
 
 namespace UPB.PricingBooks.Data
@@ -14,6 +13,6 @@ namespace UPB.PricingBooks.Data
         ListP AddList(ListP list);
         ListP UpdateList(ListP listUpdate);
         ListP DeleteList(ListP list);
-        List<ListP> GetAlLList();
+        List<ListP> GetAllList();
     }
 }
