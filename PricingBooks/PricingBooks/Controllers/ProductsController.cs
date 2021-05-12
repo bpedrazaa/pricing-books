@@ -19,6 +19,7 @@ namespace UPB.PricingBooks.Presentation.Controllers
         }
 
         //CRUD
+        //GET
         [HttpGet]
         [Route("{pricingBookId}/products")]
         public List<Product> GetProducts([FromRoute] int pricingBookId)
@@ -26,6 +27,7 @@ namespace UPB.PricingBooks.Presentation.Controllers
             return _productsManager.GetProducts(pricingBookId);
         }
 
+        //PUT
         [HttpPost]
         [Route("{pricingBookId}/products")]
         public Product CreateProduct([FromBody] Product product, [FromRoute] int pricingBookId)
@@ -33,6 +35,7 @@ namespace UPB.PricingBooks.Presentation.Controllers
             return _productsManager.CreateProduct(product, pricingBookId);
         }
 
+        //UPDATE
         [HttpPut]
         [Route("{pricingBookId}/products")]
         public Product UpdateProduct([FromBody] Product product, [FromRoute] int pricingBookId)
@@ -40,6 +43,7 @@ namespace UPB.PricingBooks.Presentation.Controllers
             return _productsManager.UpdateProduct(product, pricingBookId);
         }
 
+        //DELETE
         [HttpDelete]
         [Route("{pricingBookId}/products")]
         public Product DeleteProduct([FromBody] Product product, [FromRoute] int pricingBookId)
