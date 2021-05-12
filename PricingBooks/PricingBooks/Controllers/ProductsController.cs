@@ -37,7 +37,7 @@ namespace UPB.PricingBooks.Presentation.Controllers
 
         //UPDATE
         [HttpPut]
-        [Route("{pricingBookId}/products")]
+        [Route("{pricingBookId}/products/product")]
         public Product UpdateProduct([FromBody] Product product, [FromRoute] int pricingBookId)
         {
             return _productsManager.UpdateProduct(product, pricingBookId);
@@ -45,7 +45,7 @@ namespace UPB.PricingBooks.Presentation.Controllers
 
         //DELETE
         [HttpDelete]
-        [Route("{pricingBookId}/products")]
+        [Route("{pricingBookId}/products/product")]
         public Product DeleteProduct([FromBody] Product product, [FromRoute] int pricingBookId)
         {
             return _productsManager.DeleteProduct(product, pricingBookId);
