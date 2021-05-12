@@ -23,12 +23,24 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public PricingBook CreatePricingBook(PricingBook book)
         {
+            // Verfication if the product id is valid
+            if (string.IsNullOrEmpty(book.Id.ToString()))
+            {
+                Log.Error("Invalid Data, Can't create pricing Book:");
+                throw new InvalidPricingBookDataException("The PricingBook data is not a valid valor");
+            }
             _dbContext.AddList(DTOMappers.MapPricingBookLD(book));
             return book;
         }
 
         public PricingBook UpdatePricingBook(PricingBook book)
         {
+            // Verfication if the product id is valid
+            if (string.IsNullOrEmpty(book.Id.ToString()))
+            {
+                Log.Error("Invalid Data, Can't create pricing Book:");
+                throw new InvalidPricingBookDataException("The PricingBook data is not a valid valor");
+            }
             Data.Models.ListP bookUpdated = new Data.Models.ListP();
             bookUpdated = _dbContext.UpdateList(DTOMappers.MapPricingBookLD(book));
             return DTOMappers.MapPricingBookDL(bookUpdated);
@@ -37,6 +49,12 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public PricingBook DeletePricingBook(PricingBook book)
         {
+            // Verfication if the product id is valid
+            if (string.IsNullOrEmpty(book.Id.ToString()))
+            {
+                Log.Error("Invalid Data, Can't create pricing Book:");
+                throw new InvalidPricingBookDataException("The PricingBook data is not a valid valor");
+            }
             _dbContext.DeleteList(DTOMappers.MapPricingBookLD(book));
             return book;
         }
