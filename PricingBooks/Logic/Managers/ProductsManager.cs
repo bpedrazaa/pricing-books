@@ -14,6 +14,7 @@ namespace UPB.PricingBooks.Logic.Managers
         private readonly IDbContext _dbContext;
         private readonly ICampaignService _campaignService;
 
+        // Contructor class, recive the database and campaing Service
         public ProductsManager(IDbContext dbContext, ICampaignService campaignService)
         {
             _dbContext = dbContext;
@@ -33,7 +34,6 @@ namespace UPB.PricingBooks.Logic.Managers
             }
             return products;
         }
-
         public Product CreateProduct(Product product, int pricingBookId)
         {
             if(product.ProductId.Trim() == "")
@@ -80,7 +80,7 @@ namespace UPB.PricingBooks.Logic.Managers
             return product;
         }
 
-        
+        // Get the pomotion and calculate the fixprice 
         private void calculatePromotionPrice(Product product)
         {
             // Control for promotion price based on Campaign microservice
