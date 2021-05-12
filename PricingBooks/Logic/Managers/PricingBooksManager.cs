@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 
+using Serilog;
+
 using UPB.PricingBooks.Data;
 using UPB.PricingBooks.Logic.Models;
+using UPB.PricingBooks.Logic.Exceptions;
 
 namespace UPB.PricingBooks.Logic.Managers
 {
