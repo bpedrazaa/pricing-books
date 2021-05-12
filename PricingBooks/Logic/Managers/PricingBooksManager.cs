@@ -1,11 +1,7 @@
-﻿using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
 using UPB.PricingBooks.Data;
-using UPB.PricingBooks.Logic.Exceptions;
 using UPB.PricingBooks.Logic.Models;
-using UPB.PricingBooks.Services;
 
 namespace UPB.PricingBooks.Logic.Managers
 {
@@ -22,17 +18,29 @@ namespace UPB.PricingBooks.Logic.Managers
         }
         public List<PricingBook> GetPricingBooks()
         {
-            return DTOMappers.MapPricingBooksDL(_dbContext.GetAlLList());
+            return DTOMappers.MapPricingBooksDL(_dbContext.GetAllList());
         }
 
         public PricingBook CreatePricingBook(PricingBook book)
         {
+            // Verfication if the product id is valid
+            if (string.IsNullOrEmpty(book.Id.ToString()))
+            {
+                Log.Error("Invalid Data, Can't create pricing Book:");
+                throw new InvalidPricingBookDataException("The PricingBook data is not a valid valor");
+            }
             _dbContext.AddList(DTOMappers.MapPricingBookLD(book));
             return book;
         }
 
         public PricingBook UpdatePricingBook(PricingBook book)
         {
+            // Verfication if the product id is valid
+            if (string.IsNullOrEmpty(book.Id.ToString()))
+            {
+                Log.Error("Invalid Data, Can't create pricing Book:");
+                throw new InvalidPricingBookDataException("The PricingBook data is not a valid valor");
+            }
             Data.Models.ListP bookUpdated = new Data.Models.ListP();
             bookUpdated = _dbContext.UpdateList(DTOMappers.MapPricingBookLD(book));
             return DTOMappers.MapPricingBookDL(bookUpdated);
@@ -41,6 +49,12 @@ namespace UPB.PricingBooks.Logic.Managers
 
         public PricingBook DeletePricingBook(PricingBook book)
         {
+            // Verfication if the product id is valid
+            if (string.IsNullOrEmpty(book.Id.ToString()))
+            {
+                Log.Error("Invalid Data, Can't create pricing Book:");
+                throw new InvalidPricingBookDataException("The PricingBook data is not a valid valor");
+            }
             _dbContext.DeleteList(DTOMappers.MapPricingBookLD(book));
             return book;
         }
