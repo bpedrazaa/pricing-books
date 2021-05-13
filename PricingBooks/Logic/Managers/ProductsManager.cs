@@ -37,7 +37,7 @@ namespace UPB.PricingBooks.Logic.Managers
         public Product CreateProduct(Product product, int pricingBookId)
         {
             // Verfication if the product id is an empty field
-            if(product.ProductId.Trim() == "")
+            if (ValidateLogicProduct(product))
             {
                 Log.Error("Invalid Data, Can't create product:");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
@@ -57,7 +57,7 @@ namespace UPB.PricingBooks.Logic.Managers
         public Product UpdateProduct(Product product, int pricingBookId)
         {
             // Verfication if the product id is an empty field
-            if (product.ProductId.Trim() == "")
+            if (ValidateLogicProduct(product))
             {
                 Log.Error("Invalid Data, Can't update product");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
@@ -74,7 +74,7 @@ namespace UPB.PricingBooks.Logic.Managers
         public Product DeleteProduct(Product product, int pricingBookId)
         {
             // Verfication if the product id is an empty field
-            if (product.ProductId.Trim() == "")
+            if (ValidateLogicProduct(product))
             {
                 Log.Error("Invalid Data, Can't delete product");
                 throw new InvalidProductDataException("The Product data is not a valid type of data");
@@ -110,6 +110,12 @@ namespace UPB.PricingBooks.Logic.Managers
                 //If an active campaig does not exist the promotion price is empty.
                 product.PromotionPrice = 0;
             }
+        }
+
+        //Method for Validate Data 
+        private bool ValidateLogicProduct(Product product)
+        {
+            return product.PricingBookId == null || product.ProductId == "" || product.PromotionPrice == null || product.FixedPrice == null;
         }
     }
 }
