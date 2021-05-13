@@ -5,7 +5,7 @@ namespace UPB.PricingBooks.Logic.Models
     public class PricingBook
     {
 
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string Description { get; set; }
 

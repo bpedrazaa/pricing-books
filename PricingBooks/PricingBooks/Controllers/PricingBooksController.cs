@@ -19,14 +19,12 @@ namespace UPB.PricingBooks.Presentation.Controllers
 
         //CRUD
         [HttpGet]
-        //[Route("{pricingBookId}")]
         public List<PricingBook> GetPricingBooks()
         {
             return _pricingBookManager.GetPricingBooks();
         }
 
         [HttpPost]
-        [Route("{pricingBookId}")]
         public PricingBook CreatePricingBook([FromBody] PricingBook PricingBook)
         {
             return _pricingBookManager.CreatePricingBook(PricingBook);
