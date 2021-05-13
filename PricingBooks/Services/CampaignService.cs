@@ -6,22 +6,23 @@ using Serilog;
 
 using UPB.PricingBooks.Services.Models;
 using UPB.PricingBooks.Services.Exceptions;
-
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace UPB.PricingBooks.Services
 {
     public class CampaignService : ICampaignService
     {
-        // Uncomment for wire-up
-        //public readonly HttpClient _campaignHttp;
-        //private readonly IConfiguration _configuration;
+        // Comment for use mock, uncomment for wire-up
+        private readonly HttpClient _campaignHttp;
+        private readonly IConfiguration _configuration;
 
-        /*public CampaignService(HttpClient campaign,IConfiguration configuration)
+        public CampaignService(IConfiguration configuration)
         {
             _configuration = configuration;
-            campaign.BaseAddress = new Uri(_configuration["Microservices:CampaignUrl"]);
-            _campaignHttp = campaign;
-        }*/
+            _campaignHttp = new HttpClient();
+            _campaignHttp.BaseAddress = new Uri(_configuration["Microservices:CampaignUrl"]);
+        }
 
 
 
@@ -29,10 +30,10 @@ namespace UPB.PricingBooks.Services
         {
             try
             {
-               //var response = await _campaignHttp.GetAsync("/campaign");
-                //string responseBody = await response.Content.ReadAsStringAsync();
-                string responseMock = "{\"name\":\"Black Friday Campaign 2021\",\"type\":\"BFRIDAY\",\"description\":\"All products have a discount\",\"enable\":\"true\"}";
-                Campaign campaign = Newtonsoft.Json.JsonConvert.DeserializeObject<Campaign>(responseMock);
+                var response = await _campaignHttp.GetAsync("/api/campaigns");
+                string responseBody = await response.Content.ReadAsStringAsync();
+                //string responseMock = "{\"name\":\"Black Friday Campaign 2021\",\"type\":\"BFRIDAY\",\"description\":\"All products have a discount\",\"enable\":\"true\"}";
+                Campaign campaign = Newtonsoft.Json.JsonConvert.DeserializeObject<Campaign>(responseBody);
                 return campaign;
             }
             catch (Exception ex)
@@ -46,10 +47,10 @@ namespace UPB.PricingBooks.Services
         {
             try
             {
-                //var response = await _campaignHttp.GetAsync("/campaign");
-                //string responseBody = await response.Content.ReadAsStringAsync();
-                string responseMock = "[{\"name\":\"Black Friday Campaign 2021\",\"type\":\"BFRIDAY\",\"description\":\"All products have a discount\",\"enable\":\"true\"}]";
-                List<Campaign> campaigns = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Campaign>>(responseMock);
+                var response = await _campaignHttp.GetAsync("/api/campaigns");
+                string responseBody = await response.Content.ReadAsStringAsync();
+                //string responseMock = "[{\"name\":\"Black Friday Campaign 2021\",\"type\":\"BFRIDAY\",\"description\":\"All products have a discount\",\"enable\":\"true\"}]";
+                List<Campaign> campaigns = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Campaign>>(responseBody);
                 return campaigns;
 
             }
