@@ -6,8 +6,26 @@
     "Content": [
       {
         "PricingBookId": 1,
+        "IdProducto": "SOCCKER-000",
+        "precio": 200,
+        "precioF": 0
+      },
+      {
+        "PricingBookId": 1,
         "IdProducto": "BASKET-000",
         "precio": 150,
+        "precioF": 0
+      },
+      {
+        "PricingBookId": 1,
+        "IdProducto": "SOCCKER-001",
+        "precio": 250,
+        "precioF": 0
+      },
+      {
+        "PricingBookId": 1,
+        "IdProducto": "BASKET-001",
+        "precio": 100,
         "precioF": 0
       }
     ]
