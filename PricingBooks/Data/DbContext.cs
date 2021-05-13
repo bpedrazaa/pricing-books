@@ -93,11 +93,19 @@ namespace UPB.PricingBooks.Data
 
             }
         }
-        // 
+        //Methods for interaction with Product's Data Base 
+        public List<Product> GetAllProduct()
+        {
+            if (ProductTable.Count == 0)
+            {
+                throw new ListEmptyException("The list is empty");
+            }
+            return ProductTable;
+        }
         public Product AddProduct(Product product)
         {
             // Verification if the id from the product to add is empty
-            if (product.IdProducto == "")
+            if (ValidateDataProducts(product))
             {
                 Log.Error("Invalid Data, Can't add this product");
                 throw new InvalidProductDataException("The product don't have all data");
@@ -114,7 +122,7 @@ namespace UPB.PricingBooks.Data
         public Product UpdateProduct(Product productToUpdate)
         {
             // Verification if the id from the product to update is empty
-            if (productToUpdate.IdProducto == "")
+            if (ValidateDataProducts(productToUpdate))
             {
                 Log.Error("Invalid Data, the product don't have all data");
                 throw new InvalidProductDataException("The product don't have all data");
@@ -135,7 +143,7 @@ namespace UPB.PricingBooks.Data
         }
         public Product DeleteProduct(Product product)
         {
-            if (product.IdProducto == "")
+            if (ValidateDataProducts(product))
             {
                 Log.Error("Invalid Data, the product don't have all data");
                 throw new InvalidProductDataException("The product don't have all data");
@@ -152,34 +160,33 @@ namespace UPB.PricingBooks.Data
             }
             return product;
         }
-        public List<Product> GetAllProduct()
+
+        //Method for interaction with PricingBook's Data Base 
+        public List<ListP> GetAllList()
         {
-            if(ProductTable.Count == 0)
+            if (ListProduct.Count == 0)
             {
                 throw new ListEmptyException("The list is empty");
             }
-            return ProductTable;
+            return ListProduct;
         }
 
         public ListP AddList(ListP list)
         {
-            if (list.Id == 0)
+            if (ValidateDataListP(list))
             {
                 Log.Error("Invalid Data, Can't add this product");
                 throw new InvalidProductDataException("the product don't have all data");
-
-
             }
             ListProduct.Add(list);
             return list;
         }
         public ListP UpdateList(ListP listUpdate)
         {
-            if (listUpdate.Id == 0)
+            if (ValidateDataListP(listUpdate))
             {
                 Log.Error("Invalid Data, the product don't have all data");
                 throw new InvalidProductDataException("the product don't have all data");
-
             }
             ListP listL= new ListP();
             try
@@ -196,12 +203,11 @@ namespace UPB.PricingBooks.Data
         }
         public ListP DeleteList(ListP list)
         {
-            if (list.Id == 0)
+            if (ValidateDataListP(list))
             {
                 Log.Error("Invalid Data, the product don't have all data");
                 throw new InvalidProductDataException("the product don't have all data");
             }
-
             try
             {
                 ListProduct.Remove(list);
@@ -213,13 +219,16 @@ namespace UPB.PricingBooks.Data
             }
             return list;
         }
-        public List<ListP> GetAllList()
+        
+
+        //Methods for validate data 
+        private bool ValidateDataListP(ListP book)
         {
-            if (ListProduct.Count == 0)
-            {
-                throw new ListEmptyException("The list is empty");
-            }
-            return ListProduct;
+            return book.Id == null || book.Description == "" || book.Name == "";
+        }
+        private bool ValidateDataProducts(Product product)
+        {
+            return product.PricingBookId == null || product.IdProducto == "" || product.precioF == null || product.precio == null;
         }
     }
 }
