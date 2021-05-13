@@ -92,19 +92,20 @@ namespace UPB.PricingBooks.Logic.Managers
         private void calculatePromotionPrice(Product product)
         {
             // Control for promotion price based on Campaign microservice
-            // Using the first element of the list
-            string codeCampaign = _campaignService.GetAllCampaign().Result[0].Type;
+            // Using the last campaign in the list, the most recent in other words
+            int lastCampaign = _campaignService.GetAllCampaign().Result.Count - 1;
+            string codeCampaign = _campaignService.GetAllCampaign().Result[lastCampaign].Type;
             if (codeCampaign == "XMAS" || codeCampaign == "xmas")
             {
-                product.PromotionPrice = product.FixedPrice * 0.05;
+                product.PromotionPrice = product.FixedPrice - (product.FixedPrice * 0.05);
             }
             else if (codeCampaign == "SUMMER" || codeCampaign == "summer")
             {
-                product.PromotionPrice = product.FixedPrice * 0.2;
+                product.PromotionPrice = product.FixedPrice - (product.FixedPrice * 0.2);
             }
             else if (codeCampaign == "BFRIDAY" || codeCampaign == "bfriday")
             {
-                product.PromotionPrice = product.FixedPrice * 0.25;
+                product.PromotionPrice = product.FixedPrice - (product.FixedPrice * 0.25);
             }
             else
             {
